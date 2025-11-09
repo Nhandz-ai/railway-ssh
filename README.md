@@ -31,5 +31,8 @@ railway-ssh/
 ### 1️⃣ Fork hoặc clone repo này
 Bạn có thể fork repo này vào GitHub cá nhân, hoặc clone thủ công:
 ```bash
-git clone https://github.com/<tên-bạn>/railway-ssh.git
+git clone https://github.com/trongthaohub/railway-ssh.git
 cd railway-ssh
+```
+### 2️⃣ làm theo hướng dẫn tại youtube
+[Video](https://youtu.be/yd-Q_KnJs8w?si=Y-xQ5wKM6cbYyXRu)
