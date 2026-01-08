@@ -26,11 +26,13 @@ RUN apt-get update && apt-get
 
 # -----------------------------
 
-ARG USERNAME=trthaodev ARG PASSWORD=thaodev@ RUN useradd -m -s /bin/bash ${USERNAME} 
-&& echo "${USERNAME}:${PASSWORD}" | chpasswd 
-&& usermod -aG sudo ${USERNAME} 
-&& echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/99_sudo_nopasswd 
-&& chmod 0440 /etc/sudoers.d/99_sudo_nopasswd
+ARG USERNAME=trthaodev
+ARG PASSWORD=thaodev@
+RUN useradd -m -s /bin/bash ${USERNAME} \
+    && echo "${USERNAME}:${PASSWORD}" | chpasswd 
+    && usermod -aG sudo ${USERNAME} 
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/99_sudo_nopasswd 
+    && chmod 0440 /etc/sudoers.d/99_sudo_nopasswd
 
 # -----------------------------
 
@@ -38,14 +40,14 @@ ARG USERNAME=trthaodev ARG PASSWORD=thaodev@ RUN useradd -m -s /bin/bash ${USERN
 
 # -----------------------------
 
-Keep password auth for simplicity; recommended: use keys instead
+# Keep password auth for simplicity; recommended: use keys instead
 
 RUN sed -i 's/^#PasswordAuthentication./PasswordAuthentication yes/' /etc/ssh/sshd_config || true 
-&& sed -i 's/^#PermitRootLogin./PermitRootLogin yes/' /etc/ssh/sshd_config || true 
-&& echo 'ClientAliveInterval 60' >> /etc/ssh/sshd_config 
-&& echo 'ClientAliveCountMax 3' >> /etc/ssh/sshd_config
+    && sed -i 's/^#PermitRootLogin./PermitRootLogin yes/' /etc/ssh/sshd_config || true 
+    && echo 'ClientAliveInterval 60' >> /etc/ssh/sshd_config
+    && echo 'ClientAliveCountMax 3' >> /etc/ssh/sshd_config
 
-generate host keys so sshd starts cleanly
+# generate host keys so sshd starts cleanly
 
 RUN ssh-keygen -A
 
@@ -56,10 +58,10 @@ RUN ssh-keygen -A
 # -----------------------------
 
 RUN wget -qO /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz 
-&& tar -xzf /tmp/ngrok.tgz -C /tmp 
-&& mv /tmp/ngrok /usr/local/bin/ngrok 
-&& chmod +x /usr/local/bin/ngrok 
-&& rm -f /tmp/ngrok.tgz
+    && tar -xzf /tmp/ngrok.tgz -C /tmp 
+    && mv /tmp/ngrok /usr/local/bin/ngrok 
+    && chmod +x /usr/local/bin/ngrok 
+    && rm -f /tmp/ngrok.tgz
 
 # -----------------------------
 
@@ -67,7 +69,8 @@ RUN wget -qO /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable
 
 # -----------------------------
 
-COPY start-ngrok-ssh.sh /usr/local/bin/start-ngrok-ssh.sh RUN chmod +x /usr/local/bin/start-ngrok-ssh.sh
+COPY start-ngrok-ssh.sh /usr/local/bin/start-ngrok-ssh.sh
+RUN chmod +x /usr/local/bin/start-ngrok-ssh.sh
 
 # -----------------------------
 
