@@ -57,8 +57,8 @@ RUN ssh-keygen -A
 # -----------------------------
 
 RUN wget -qO /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz \
-    && tar -xzf /tmp/ngrok.tgz -C /tmp 
-    && mv /tmp/ngrok /usr/local/bin/ngrok 
+    && tar -xzf /tmp/ngrok.tgz -C /tmp \
+    && mv /tmp/ngrok /usr/local/bin/ngrok \
     && chmod +x /usr/local/bin/ngrok \
     && rm -f /tmp/ngrok.tgz
 
