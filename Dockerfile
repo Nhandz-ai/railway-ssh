@@ -32,11 +32,11 @@ ARG USERNAME=trthaodev ARG PASSWORD=thaodev@ RUN useradd -m -s /bin/bash ${USERN
 && echo '%sudo ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/99_sudo_nopasswd 
 && chmod 0440 /etc/sudoers.d/99_sudo_nopasswd
 
------------------------------
+# -----------------------------
 
-Configure SSH
+# Configure SSH
 
------------------------------
+# -----------------------------
 
 Keep password auth for simplicity; recommended: use keys instead
 
@@ -49,11 +49,11 @@ generate host keys so sshd starts cleanly
 
 RUN ssh-keygen -A
 
------------------------------
+# -----------------------------
 
-Install Ngrok v3
+# Install Ngrok v3
 
------------------------------
+# -----------------------------
 
 RUN wget -qO /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz 
 && tar -xzf /tmp/ngrok.tgz -C /tmp 
@@ -61,26 +61,26 @@ RUN wget -qO /tmp/ngrok.tgz https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable
 && chmod +x /usr/local/bin/ngrok 
 && rm -f /tmp/ngrok.tgz
 
------------------------------
+# -----------------------------
 
-Copy start script
+# Copy start script
 
------------------------------
+# -----------------------------
 
 COPY start-ngrok-ssh.sh /usr/local/bin/start-ngrok-ssh.sh RUN chmod +x /usr/local/bin/start-ngrok-ssh.sh
 
------------------------------
+# -----------------------------
 
-Expose ports
+# Expose ports
 
------------------------------
+# -----------------------------
 
 EXPOSE 8080 22 14489 888 80 443 20 21
 
------------------------------
+# -----------------------------
 
-Start container
+# Start container
 
------------------------------
+# -----------------------------
 
 CMD ["/usr/local/bin/start-ngrok-ssh.sh"]
