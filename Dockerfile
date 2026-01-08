@@ -41,7 +41,7 @@ RUN useradd -m -s /bin/bash ${USERNAME} \
 
 # Keep password auth for simplicity; recommended: use keys instead
 
-RUN sed -i 's/^#PasswordAuthentication./PasswordAuthentication yes/' /etc/ssh/sshd_config || true 
+RUN sed -i 's/^#PasswordAuthentication./PasswordAuthentication yes/' /etc/ssh/sshd_config || true \
     && sed -i 's/^#PermitRootLogin./PermitRootLogin yes/' /etc/ssh/sshd_config || true \
     && echo 'ClientAliveInterval 60' >> /etc/ssh/sshd_config \
     && echo 'ClientAliveCountMax 3' >> /etc/ssh/sshd_config
